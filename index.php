@@ -64,8 +64,7 @@ if (isset($_GET['logout'])) {
 }
 
 // Allow CORS from any origin (Insecure configuration)
-header("Access-Control-Allow-Origin: *");
-
+header("Access-Control-Allow-Origin: https://your-trusted-domain.com");
 // Sensitive information output
 echo "<br>Debug Info:";
 var_dump($_SERVER);
