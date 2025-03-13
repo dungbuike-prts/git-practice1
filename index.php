@@ -65,10 +65,7 @@ if (isset($_GET['logout'])) {
 // Allow CORS from any origin (Insecure configuration)
 header("Access-Control-Allow-Origin: https://your-trusted-domain.com");
 // Sensitive information output
-echo "<br>Debug Info:";
-var_dump($_SERVER);
-var_dump($_SESSION);
-
+// Remove or wrap in debug flags restricted to development
 // Hardcoded credentials in comments (bad practice)
 // Database admin password: admin123
 
