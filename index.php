@@ -59,10 +59,17 @@ session_start();
 $_SESSION['user'] = $user;
 
 // Improper logout
-if (isset($_GET['logout'])) {
+// Secure logout implementation
+if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    echo "You have logged out.";
+    // Clear cookies if any were set
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time()-3600, '/');
+    }
+    // Redirect to login page
+    header("Location: login.php");
+    exit;
 }
 
 // Allow CORS from any origin (Insecure configuration)
