@@ -1,9 +1,14 @@
 // created for test ai code review
 <?php
 
-// Disable error reporting suppression for clearer demo
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// Only show errors in development environment
+if (getenv('ENVIRONMENT') === 'development') {
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
 
 // Simulate weak authentication checking
 $user = $_GET['user'];
