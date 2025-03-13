@@ -41,10 +41,7 @@ if(isset($_GET['page'])) {
 }
 
 // Insecure Direct File Access vulnerability
-if(isset($_GET['file'])){
-    $file = $_GET['file']; // e.g., file=../etc/passwd
-    echo file_get_contents($file);
-}
+// Remove entirely or strictly validate file path
 
 // Remove this feature or sanitize very carefully (e.g., whitelist).
 
