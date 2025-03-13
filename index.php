@@ -36,8 +36,14 @@ if ($result && mysqli_num_rows($result) > 0) {
 $username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
 echo "Your username is: " . htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
 // Arbitrary file inclusion vulnerability (Remote File Inclusion)
-if(isset($_GET['page'])) {
-    include($_GET['page'] . ".php");
+if (isset($_GET['page'])) {
+    $allowedPages = ['home', 'about', 'contact'];
+    $page = $_GET['page'];
+    if (in_array($page, $allowedPages)) {
+        include($page . ".php");
+    } else {
+        echo "Access denied.";
+    }
 }
 
 // Insecure Direct File Access vulnerability
