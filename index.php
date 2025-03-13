@@ -41,10 +41,7 @@ if(isset($_GET['file'])){
     echo file_get_contents($file);
 }
 
-// Command injection vulnerability
-if(isset($_POST['cmd'])){
-    system($_POST['cmd']); // directly executes submitted commands
-}
+// Remove this feature or sanitize very carefully (e.g., whitelist).
 
 // Dangerous phpinfo() exposure
 if(isset($_GET['info'])){
