@@ -55,8 +55,9 @@ session_start();
 $_SESSION['user'] = $user;
 
 // Improper logout
-if(isset($_GET['logout'])){
-    $_SESSION['user'] = null; // doesn't destroy the session properly
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
     echo "You have logged out.";
 }
 
