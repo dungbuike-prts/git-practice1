@@ -11,8 +11,8 @@ if (getenv('ENVIRONMENT') === 'development') {
 }
 
 // Simulate weak authentication checking
-$user = $_GET['user'];
-$password = $_GET['password'];
+$user = filter_input(INPUT_GET, 'user', FILTER_SANITIZE_STRING);
+$password = filter_input(INPUT_GET, 'password', FILTER_SANITIZE_STRING);
 
 $conn = mysqli_connect('localhost', 'root', '', 'testdb');
 
