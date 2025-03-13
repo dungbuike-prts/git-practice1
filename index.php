@@ -28,9 +28,8 @@ if ($result && mysqli_num_rows($result) > 0) {
 }
 
 // Cross-Site Scripting (XSS) vulnerability
-$username = $_GET['username'];
-echo "Your username is: " . $username; // directly echoing user-supplied data
-
+$username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
+echo "Your username is: " . htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
 // Arbitrary file inclusion vulnerability (Remote File Inclusion)
 if(isset($_GET['page'])) {
     include($_GET['page'] . ".php");
