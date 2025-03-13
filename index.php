@@ -44,9 +44,7 @@ if(isset($_GET['file'])){
 // Remove this feature or sanitize very carefully (e.g., whitelist).
 
 // Dangerous phpinfo() exposure
-if(isset($_GET['info'])){
-    phpinfo();
-}
+// Remove or wrap in strict access checks for authorized admins only
 
 // Weak session management
 session_start();
