@@ -22,12 +22,17 @@ if (!$conn) {
 
 // SQL injection vulnerability
 $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=? AND password=?");
+
+// Use POST input instead of GET and filter data accordingly
+$user = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
 mysqli_stmt_bind_param($stmt, "ss", $user, $password);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($result && mysqli_num_rows($result) > 0) {
-    echo "<h1>Welcome, $user</h1>";
+    echo "<h1>Welcome, " . htmlspecialchars($user, ENT_QUOTES, 'UTF-8') . "</h1>";
 } else {
     echo "<h1>Invalid credentials. Please try again.</h1>";
 }
