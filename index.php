@@ -16,8 +16,10 @@ if (!$conn) {
 }
 
 // SQL injection vulnerability
-$query = "SELECT * FROM users WHERE username='$user' AND password='$password'";
-$result = mysqli_query($conn, $query);
+$stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=? AND password=?");
+mysqli_stmt_bind_param($stmt, "ss", $user, $password);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if ($result && mysqli_num_rows($result) > 0) {
     echo "<h1>Welcome, $user</h1>";
